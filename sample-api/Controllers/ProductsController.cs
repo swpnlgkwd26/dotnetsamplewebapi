@@ -8,30 +8,50 @@ using System.Threading.Tasks;
 
 namespace sample_api.Controllers
 {
-    // http://localhost:5001/api/Products
+    // http://localhost:5000/api/Products
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
+        private readonly IStoreRepository _repository;
+
+        public ProductsController(IStoreRepository repository)
+        {
+            _repository = repository;
+        }
         // GET :  api/products
         [HttpGet]
         public IEnumerable<Product> GetProducts()
         {
-            return new List<Product>
-            {
-                 new Product{ ProductID=1,Name="Chess"},
-                 new Product{ ProductID=2,Name="Cricket Bat"}
-            };
+            return _repository.GetProducts();
         }
 
         // GET By Id:api/products/{id}
         [HttpGet("{id}")]
-        public Product GetProductById(int id)
+        public Product GetProductById([FromRoute] int id)
         {
-            return new Product
-            {
-                Name = "Product " + id
-            };
+            return _repository.GetProductById(id);
+        }
+
+        //// POST: api/products
+        [HttpPost]
+        public void SaveProduct([FromBody] Product product)
+        {
+            _repository.SaveProduct(product);
+        }
+
+        // DELETE: api/products/{id}
+        [HttpDelete("{id}")]
+        public void DeleteProduct([FromRoute] int id)
+        {
+            _repository.DeleteProduct(id);
+        }
+
+        // PUT: api/products/{id}
+        [HttpPut]
+        public void UpdateProduct([FromBody] Product product)
+        {
+            _repository.UpdateProduct(product);
         }
     }
 }
