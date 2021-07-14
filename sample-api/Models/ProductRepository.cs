@@ -15,32 +15,31 @@ namespace sample_api.Models
             _context = context;
         }
 
-        public void DeleteProduct(int id)
+        // Async  Methods
+        public async Task DeleteProductAsync(int id)
         {
-            var product = _context.Products.Find(id);
-            _context.Products.Remove(product);
-            _context.SaveChanges();
+            var product = await _context.Products.FindAsync(id); 
+            _context.Products.Remove(product);  // Not Blocking Operation for EF 
+            await _context.SaveChangesAsync();  // Internal it saves in Queue and Executes on SaveChanges
         }
-
-        public Product GetProductById(int id)
+        public async Task<Product> GetProductByIdAsync(int id)
         {
-            // _context.Products =  Data Collection
-            return _context.Products.Find(id);
+            return await _context.Products.FindAsync(id);
+        }        
+        public IAsyncEnumerable<Product> GetProductsAsync()
+        {
+            return _context.Products;
         }
-        public List<Product> GetProducts()
+        public async Task SaveProductAsync(Product product)
         {
-            return _context.Products.ToList();
+            await _context.Products.AddAsync(product);
+            await _context.SaveChangesAsync();
         }
-        public void SaveProduct(Product product)
+        public async Task UpdateProductAsync(Product product)
         {
-            _context.Products.Add(product);
-            _context.SaveChanges();
-        }
-
-        public void UpdateProduct(Product product)
-        {
-            _context.Products.Update(product);
-            _context.SaveChanges();
+            // Queue :  Update
+            _context.Products.Update(product);// Not Blocking Operation for EF 
+            await _context.SaveChangesAsync(); // Execute
         }
     }
 }

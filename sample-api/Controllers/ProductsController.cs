@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using sample_api.Models;
+using sample_api.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace sample_api.Controllers
 {
+    // Async Controllers
     // http://localhost:5000/api/Products
     [Route("api/[controller]")]
     [ApiController]
@@ -19,39 +21,56 @@ namespace sample_api.Controllers
         {
             _repository = repository;
         }
+
+        // Asynchronous  Action Methods
         // GET :  api/products
         [HttpGet]
-        public IEnumerable<Product> GetProducts()
+        public IAsyncEnumerable<Product> GetProducts()
         {
-            return _repository.GetProducts();
+            return _repository.GetProductsAsync();
         }
 
         // GET By Id:api/products/{id}
         [HttpGet("{id}")]
-        public Product GetProductById([FromRoute] int id)
+        public async Task<Product> GetProductById([FromRoute] int id)
         {
-            return _repository.GetProductById(id);
-        }
+            return await _repository.GetProductByIdAsync(id);
+        }    
+
 
         //// POST: api/products
         [HttpPost]
-        public void SaveProduct([FromBody] Product product)
+        public async Task SaveProduct([FromBody] ProductBindingTarget productBindingTarget)
         {
-            _repository.SaveProduct(product);
+            // If ProductBindingTarget Null
+            //if (productBindingTarget == null)
+            //{
+            //    //throw some Error();
+            //}
+            //if (!ModelState.IsValid(productBindingTarget))
+            //{
+
+            //}
+            // Wrong Request
+
+            var targetProductObjct = productBindingTarget.ToProduct();           
+            await _repository.SaveProductAsync(targetProductObjct);
         }
 
         // DELETE: api/products/{id}
         [HttpDelete("{id}")]
-        public void DeleteProduct([FromRoute] int id)
+        public async Task DeleteProduct([FromRoute] int id)
         {
-            _repository.DeleteProduct(id);
+           await _repository.DeleteProductAsync(id);
         }
 
         // PUT: api/products/{id}
         [HttpPut]
-        public void UpdateProduct([FromBody] Product product)
+        public async Task UpdateProduct([FromBody] Product product)
         {
-            _repository.UpdateProduct(product);
+            // Product Is Null
+            // Product Object some Invalid Data
+           await _repository.UpdateProductAsync(product);
         }
     }
 }
