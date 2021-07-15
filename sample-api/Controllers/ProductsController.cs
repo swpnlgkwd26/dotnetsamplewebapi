@@ -25,6 +25,7 @@ namespace sample_api.Controllers
         // Asynchronous  Action Methods
         // GET :  api/products
         [HttpGet]
+        [Produces("application/json","application/xml")]
         public IAsyncEnumerable<Product> GetProducts()
         {
             return _repository.GetProductsAsync();
@@ -32,45 +33,65 @@ namespace sample_api.Controllers
 
         // GET By Id:api/products/{id}
         [HttpGet("{id}")]
-        public async Task<Product> GetProductById([FromRoute] int id)
+        [Produces("application/json")]
+        public async Task<IActionResult> GetProductById([FromRoute] int id)
         {
-            return await _repository.GetProductByIdAsync(id);
-        }    
+            var product = await _repository.GetProductByIdAsync(id);
+            if (product == null)
+            {
+                return NotFound();
 
+            }
+            return Ok(new
+            {
+                ProductId = product.ProductID,
+                ProductName = product.Name,
+                Price = product.Price,
+                Category = product.Category
+            });
+        }
 
         //// POST: api/products
         [HttpPost]
-        public async Task SaveProduct([FromBody] ProductBindingTarget productBindingTarget)
+        [Consumes("application/json")]
+        public async Task<IActionResult> SaveProduct([FromBody] ProductBindingTarget productBindingTarget)
         {
-            // If ProductBindingTarget Null
-            //if (productBindingTarget == null)
-            //{
-            //    //throw some Error();
-            //}
-            //if (!ModelState.IsValid(productBindingTarget))
-            //{
-
-            //}
-            // Wrong Request
-
-            var targetProductObjct = productBindingTarget.ToProduct();           
+            if (productBindingTarget == null)
+            {
+                return BadRequest("Model Cant not be Null");
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Model State is Invalid");
+            }
+            var targetProductObjct = productBindingTarget.ToProduct();
             await _repository.SaveProductAsync(targetProductObjct);
+            return Ok();
         }
 
         // DELETE: api/products/{id}
         [HttpDelete("{id}")]
-        public async Task DeleteProduct([FromRoute] int id)
+        public async Task<IActionResult> DeleteProduct([FromRoute] int id)
         {
-           await _repository.DeleteProductAsync(id);
+            await _repository.DeleteProductAsync(id);
+            return Ok();
         }
 
         // PUT: api/products/{id}
         [HttpPut]
-        public async Task UpdateProduct([FromBody] Product product)
+        [Consumes("application/json")]
+        public async Task<IActionResult> UpdateProduct([FromBody] Product product)
         {
-            // Product Is Null
-            // Product Object some Invalid Data
-           await _repository.UpdateProductAsync(product);
+            if (product == null)
+            {
+                return BadRequest("Model Cant not be null");
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Model is Invalid");
+            }
+            await _repository.UpdateProductAsync(product);
+            return Ok();
         }
     }
 }

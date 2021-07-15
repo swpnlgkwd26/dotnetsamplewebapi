@@ -27,6 +27,7 @@ namespace sample_api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
+                .AddXmlSerializerFormatters() // Please Send XML Format also
                 .ConfigureApiBehaviorOptions(options=>
                 options.SuppressModelStateInvalidFilter =true);
 
@@ -48,6 +49,14 @@ namespace sample_api
                     Title="Tata Power Open Web APIS" ,Version="v1"
                 });
             });
+
+            // Configuring Web API for Accept Headers
+            services.Configure<MvcOptions>(options =>
+            {
+                options.RespectBrowserAcceptHeader = true;
+                options.ReturnHttpNotAcceptable = true; // 406 Error
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
