@@ -57,6 +57,12 @@ namespace sample_api
                 options.ReturnHttpNotAcceptable = true; // 406 Error
             });
 
+            // Enable CORS
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "AllowAnyOrigin", c => c.AllowAnyOrigin());
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +74,8 @@ namespace sample_api
             }
 
             app.UseRouting();
+
+            app.UseCors("AllowAnyOrigin");
 
             app.UseSwagger();
             app.UseSwaggerUI(options =>

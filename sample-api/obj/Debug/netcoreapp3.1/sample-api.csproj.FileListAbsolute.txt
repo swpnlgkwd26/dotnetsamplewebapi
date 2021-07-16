@@ -68,3 +68,4 @@ D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\bin\Debug\netcorea
 D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\obj\Debug\netcoreapp3.1\sample-api.MvcApplicationPartsAssemblyInfo.cs
+D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\obj\Debug\netcoreapp3.1\sample-api.csprojAssemblyReference.cache
