@@ -6,7 +6,6 @@ D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\bin\Debug\netcorea
 D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\bin\Debug\netcoreapp3.1\sample-api.runtimeconfig.dev.json
 D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\bin\Debug\netcoreapp3.1\sample-api.dll
 D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\bin\Debug\netcoreapp3.1\sample-api.pdb
-D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\obj\Debug\netcoreapp3.1\sample-api.csprojAssemblyReference.cache
 D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\obj\Debug\netcoreapp3.1\sample-api.AssemblyInfoInputs.cache
 D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\obj\Debug\netcoreapp3.1\sample-api.AssemblyInfo.cs
 D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\obj\Debug\netcoreapp3.1\sample-api.csproj.CoreCompileInputs.cache

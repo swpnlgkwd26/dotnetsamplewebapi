@@ -5,6 +5,7 @@ using sample_api.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 
 namespace sample_api.Controllers
@@ -25,15 +26,25 @@ namespace sample_api.Controllers
         // Asynchronous  Action Methods
         // GET :  api/products
         [HttpGet]
-        [Produces("application/json","application/xml")]
-        public IAsyncEnumerable<Product> GetProducts()
-        {
-            return _repository.GetProductsAsync();
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public  IActionResult GetProducts()
+        {        
+            var products = _repository.GetProductsAsync();
+            if (products ==  null)
+            {
+                return NotFound();
+            }
+            return Ok(products);
         }
+
 
         // GET By Id:api/products/{id}
         [HttpGet("{id}")]
-        [Produces("application/json")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetProductById([FromRoute] int id)
         {
             var product = await _repository.GetProductByIdAsync(id);
@@ -51,9 +62,12 @@ namespace sample_api.Controllers
             });
         }
 
+
         //// POST: api/products
         [HttpPost]
-        [Consumes("application/json")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> SaveProduct([FromBody] ProductBindingTarget productBindingTarget)
         {
             if (productBindingTarget == null)
@@ -64,22 +78,30 @@ namespace sample_api.Controllers
             {
                 return BadRequest("Model State is Invalid");
             }
+            
             var targetProductObjct = productBindingTarget.ToProduct();
             await _repository.SaveProductAsync(targetProductObjct);
             return Ok();
         }
 
+
+
         // DELETE: api/products/{id}
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> DeleteProduct([FromRoute] int id)
         {
             await _repository.DeleteProductAsync(id);
             return Ok();
         }
 
+
+
         // PUT: api/products/{id}
         [HttpPut]
-        [Consumes("application/json")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateProduct([FromBody] Product product)
         {
             if (product == null)
@@ -93,5 +115,6 @@ namespace sample_api.Controllers
             await _repository.UpdateProductAsync(product);
             return Ok();
         }
+
     }
 }
