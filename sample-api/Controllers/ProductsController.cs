@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using sample_api.Models;
 using sample_api.ViewModels;
@@ -14,6 +15,7 @@ namespace sample_api.Controllers
     // http://localhost:5000/api/Products
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize (Roles = "Administrator")]
     public class ProductsController : ControllerBase
     {
         private readonly IStoreRepository _repository;

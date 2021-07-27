@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace sample_api.Models
     //  Data Context =  ConnectionString as Parameter.
     // Microsoft.EFCore
     // Microsoft.EF.SqlServer
-    public class TataDBContext : DbContext
+    public class TataDBContext : IdentityDbContext<ApplicationUser>
     {
         // Data Context class takes connectionstring as parameter
         public TataDBContext(DbContextOptions<TataDBContext> options) : base(options)

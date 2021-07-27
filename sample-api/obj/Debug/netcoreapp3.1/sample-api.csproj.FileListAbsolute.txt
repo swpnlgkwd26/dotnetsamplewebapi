@@ -69,3 +69,9 @@ D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\bin\Debug\netcorea
 D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\obj\Debug\netcoreapp3.1\sample-api.MvcApplicationPartsAssemblyInfo.cs
 D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\obj\Debug\netcoreapp3.1\sample-api.csprojAssemblyReference.cache
+D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
+D:\FreeLancerAssignments\TataPower\dotnetsampleapi\sample-api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
