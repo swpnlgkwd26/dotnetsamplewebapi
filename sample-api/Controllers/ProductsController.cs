@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using sample_api.Filters;
 using sample_api.Models;
 using sample_api.ViewModels;
 using System;
@@ -15,7 +16,7 @@ namespace sample_api.Controllers
     // http://localhost:5000/api/Products
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize (Roles = "Administrator")]
+    //[Authorize (Roles = "Administrator")]
     public class ProductsController : ControllerBase
     {
         private readonly IStoreRepository _repository;
@@ -70,19 +71,23 @@ namespace sample_api.Controllers
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        // Filters Are Applied
+        [CustomActionFilter]
         public async Task<IActionResult> SaveProduct([FromBody] ProductBindingTarget productBindingTarget)
-        {
-            if (productBindingTarget == null)
-            {
-                return BadRequest("Model Cant not be Null");
-            }
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Model State is Invalid");
-            }
-            
+        {         
             var targetProductObjct = productBindingTarget.ToProduct();
             await _repository.SaveProductAsync(targetProductObjct);
+            return Ok();
+        }
+        // PUT: api/products/{id}
+        [HttpPut]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [CustomActionFilter]
+        public async Task<IActionResult> UpdateProduct([FromBody] Product product)
+        {           
+            await _repository.UpdateProductAsync(product);
             return Ok();
         }
 
@@ -99,24 +104,6 @@ namespace sample_api.Controllers
 
 
 
-        // PUT: api/products/{id}
-        [HttpPut]
-        [Consumes(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateProduct([FromBody] Product product)
-        {
-            if (product == null)
-            {
-                return BadRequest("Model Cant not be null");
-            }
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Model is Invalid");
-            }
-            await _repository.UpdateProductAsync(product);
-            return Ok();
-        }
-
+    
     }
 }
