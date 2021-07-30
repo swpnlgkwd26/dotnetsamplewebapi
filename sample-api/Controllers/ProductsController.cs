@@ -88,7 +88,8 @@ namespace sample_api.Controllers
         public async Task<IActionResult> UpdateProduct([FromBody] Product product)
         {           
             await _repository.UpdateProductAsync(product);
-            return Ok();
+            
+            return Ok(product);
         }
 
 

@@ -12,6 +12,9 @@ namespace sample_api.Filters
         // When the execution is in progress
         public override void OnActionExecuting(ActionExecutingContext context)
         {
+
+          //  var data = context.ActionArguments["productBindingTarget"];
+
             var param = context.ActionArguments.SingleOrDefault();
             if (param.Value == null)
             {

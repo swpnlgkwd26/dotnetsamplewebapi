@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample-api", "sample-api.csproj", "{01008257-7AC5-4434-BC6E-5F741A857B30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sample-api", "sample-api.csproj", "{01008257-7AC5-4434-BC6E-5F741A857B30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetsampleapi.IntegrationTests", "..\dotnetsampleapi.IntegrationTests\dotnetsampleapi.IntegrationTests.csproj", "{15201673-DA5A-404C-926F-CD05D21A5147}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{01008257-7AC5-4434-BC6E-5F741A857B30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01008257-7AC5-4434-BC6E-5F741A857B30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01008257-7AC5-4434-BC6E-5F741A857B30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15201673-DA5A-404C-926F-CD05D21A5147}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15201673-DA5A-404C-926F-CD05D21A5147}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15201673-DA5A-404C-926F-CD05D21A5147}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15201673-DA5A-404C-926F-CD05D21A5147}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
